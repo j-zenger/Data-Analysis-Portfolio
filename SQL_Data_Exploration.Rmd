@@ -1,0 +1,495 @@
+---
+title: "ESG Company SQL Exploratory Data Analysis"
+author: "Josie Zenger"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    toc: true
+    toc_float: true
+    number_sections: true
+    df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Introduction
+
+This report is an exploratory data analysis (EDA) of ESG (Environmental, Social, and Governance) assessment data for a variety of companies. The analysis uses SQL queries to extract insights from two databases downloaded from Kaggle.com that contain company profiles, ESG risk ratings, controversy scores, and other company-specific metrics. The purpose of this report is to showcase my SQL skills in querying, analyzing, and visualizing data from multiple tables to derive meaningful insights.
+
+Skills exhibited: Data cleaning, joins, aggregations, filtering, and visualization (plotly and ggplot).
+
+# Data Overview
+
+The dataset comprises two main tables from Kaggle.com: the [S&P 500 ESG Risk Ratings]("https://www.kaggle.com/datasets/pritish509/s-and-p-500-esg-risk-ratings")" dataset compiled by Pritish Dugar in 2023, and [Public Company ESG Ratings Dataset]("https://www.kaggle.com/datasets/alistairking/public-company-esg-ratings-dataset") dataset compiled by Alistair King in 2023. These datasets are publically available. The datasets contain the following information:
+
+(1). **`Public Company ESG Ratings Dataset`**: 
+  (a). *Basic company information*: ticker symbol, company name, currency, exchange, industry, logo URL, website URL
+  (b). *Environmental scores and rating*: environment_score, environment_grade, environment_level
+  (c). *Social scores and rating*: social_score, social_grade, social_level
+  (d). *Governance scores and rating*: governance_score, governance_grade, governance_level
+  (e). *Overall ESG scores and rating*: total_score, total_grade, total_level
+  (f). Last processing date of the ESG data
+  (g). CIK identifier
+
+(2). **`S&P 500 ESG Risk Ratings`**: Symbol, Name, Address, Sector, Industry, Full Time Employees, Description, Total ESG Risk Score, Environment Risk Score, Governance Risk Score, Social Risk Score, Controversy Level, Controversy Score, ESG Risk Percentile, ESG Risk Level
+
+```{r Load Libraries and Data, echo=FALSE}
+# Load required libraries
+library(dplyr) 
+library(sqldf)  
+library(readr)  
+library(DBI)
+library(tidyverse)
+library(plotly)
+library(DT)
+
+# Load the data files
+public_esg <- read.csv("~/Local/Personal_Projects/SQL/data.csv") 
+sp_esg <- read.csv("~/Local/Personal_Projects/SQL/SP_Risk_Ratings.csv")  
+
+```
+
+```{r Clean Data, echo=FALSE}
+# Rename columns: Replace periods with underscores and convert to lowercase
+sp_esg <- sp_esg %>%
+  rename_with(~ gsub("\\.", "_", .x) %>% tolower())
+```
+
+# SQL Queries and Visualizations
+
+### Evaluate Similarities Between the Datasets
+The first query evaluates the similarities between the two datasets by joining them on the company ticker symbol and comparing the industry fields. The query uses the **'LIKE'** function to compare companies with similar industry labels in both datasets.
+```{r Evaluate Dataset, echo=TRUE}
+# Define the SQL query to join the two tables
+query0 <- "
+SELECT d1.name AS Name, d1.industry AS D1_Industry, d2.industry AS D2_Industry
+FROM public_esg d1
+INNER JOIN sp_esg d2
+ON d2.symbol = UPPER(d1.ticker)
+WHERE 
+    d1.industry LIKE '%' || d2.industry || '%'
+    OR d2.industry LIKE '%' || d1.industry || '%'
+ORDER BY d1.industry
+"
+
+# Execute the query
+eval_dataset <- sqldf(query0)
+
+# Display the result in a datatable
+datatable(eval_dataset, options = list(
+  scrollX = TRUE,  
+  pageLength = 5   
+))
+```
+
+### ESG Risk Scores by Company
+The following query retrieves the ESG risk scores (total, environmental, social, and governance) for companies, sorted alphabetically by name. The results are displayed in an interactive plot using  **plotly**.
+```{r Query 1, echo=TRUE}
+query1<- 
+"SELECT 
+    d1.name AS company_name, d1.industry, total_esg_risk_score, environment_risk_score, governance_risk_score, social_risk_score
+FROM 
+    public_esg d1
+INNER JOIN 
+    sp_esg d2
+ON 
+    d2.symbol = UPPER(d1.ticker)
+WHERE total_esg_risk_score IS NOT NULL
+ORDER BY d1.name ASC"
+
+# Execute the query
+esg_risk_scores <- sqldf(query1)
+# Display the result in a datatable
+datatable(esg_risk_scores, options = list(
+  scrollX = TRUE,  
+  pageLength = 5   
+))
+
+```
+
+```{r Plot Query 1, echo=FALSE, fig.width=9, fig.height=6, fig.align='center'}
+
+# Plot the ESG risk scores by company
+plot1 <- plot_ly(
+  data = esg_risk_scores, # Drawing data from Query 1
+  x = ~`total_esg_risk_score`, 
+  y = ~`company_name`, 
+  type = 'scatter',
+  mode = 'markers',
+  text = ~paste("Company:", company_name, "<br>Total ESG Risk Score:", total_esg_risk_score), # Tooltip text
+  hoverinfo = 'text', # Only shows company and ESG risk rating in the tooltip
+  marker = list(size = 10, color = 'black') # Default color for all points
+) %>%
+  layout(
+    title = list(
+      text = "Interactive Plot of Total ESG Risk Scores by Company",
+      font = list(size = 20) # Increase title size
+    ),
+    # X-axis label formatting
+    xaxis = list(
+      title = "Total ESG Risk Score",
+      titlefont = list(size = 18),
+      ticktext = c("Low", "Medium", "High"), # Optional tick labels
+      showticklabels = TRUE
+    ),
+    # Y-axis label formatting
+    yaxis = list(
+      title = "Company",
+      showticklabels = FALSE,
+      titlefont = list(size = 18)
+    ),
+    # Add annotation for citation
+    annotations = list(
+      list(
+        text = "Source: Kaggle.com", # Citation
+        x = 0.1, y = -0.1,  # Position of the annotation
+        showarrow = FALSE,
+        font = list(size = 10),
+        xref = "paper",
+        yref = "paper",
+        xanchor = "left",
+        yanchor = "top"
+      )
+    ),
+    # Adjust margins for the plot
+    margin = list(
+      l = 100, # Left margin
+      r = 50,  # Right margin
+      t = 100, # Top margin to avoid title cutoff
+      b = 100  # Bottom margin for citation
+    )
+  )
+
+# Display the plot
+plot1
+
+```
+
+
+### Average ESG Risk by Industry
+The following query calculates the average ESG risk score for industries with a low ESG risk level. The results are displayed in a bar plot using **ggplot**. I use the **'ROUND'** and **'GROUP BY'** functions to calculate the average risk score for each industry.
+```{r Query 2, echo=TRUE}
+query2 <- 
+"SELECT 
+    d1.industry AS Industry, ROUND(avg(total_esg_risk_score), 2) AS Average_Industry_Risk
+FROM 
+    public_esg d1
+INNER JOIN 
+    sp_esg d2
+ON 
+    d2.symbol = UPPER(d1.ticker)
+WHERE esg_risk_level = 'Low'
+GROUP BY d1.industry
+ORDER BY Average_Industry_Risk ASC"
+
+# Execute the query
+avg_industry <- sqldf(query2)
+```
+
+```{r Plot Query 2, echo=FALSE, fig.width=9, fig.height=6, fig.align='center'}
+
+# Reorder the bars in descending order
+avg_industry <- avg_industry %>%
+  mutate(Industry = reorder(Industry, -Average_Industry_Risk))
+
+# Create the bar plot
+ggplot(avg_industry, aes(x = Industry, y = Average_Industry_Risk)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(
+    title = "Average ESG Risk by Industry",
+    x = "",
+    y = "Average ESG Risk Score" ,
+    caption = "Source: Kaggle.com" 
+  ) +
+  theme_minimal() +
+  coord_flip()  # Flip the coordinates for better readability
+```
+**Findings**: The plot shows the average ESG risk scores for industries with a low ESG risk level. The 'Auto Components' industry has the lowest average ESG risk score, while the 'Machinery' industry has the highest average ESG risk score.
+
+### Companies with High Controversy Scores
+The following query identifies companies with controversy scores exceeding 3, sorted by controversy level. The results are displayed in a datatable using the **DT** package.
+```{r Query 3, echo=TRUE}
+query3 <-
+"SELECT 
+    d1.name as Name, controversy_level AS Controversy_Level, controversy_score AS Controversy_Score, d1.industry as Industry
+FROM 
+    public_esg d1
+INNER JOIN 
+    sp_esg d2
+ON 
+    d2.symbol = UPPER(d1.ticker)
+WHERE controversy_score > 3
+ORDER BY controversy_level"
+
+# Execute the query
+high_contro <- sqldf(query3)
+
+datatable(high_contro, options = list(
+  scrollX = TRUE,  
+  pageLength = 5   
+))
+```
+**Findings**: Companies with high controversy scores come from a variety of industries, including automobiles, media, and banking. The ESG practices of these companies are controversial and should not be replicated in an ideal ESG framework.
+
+### Companies with Exceptional Governance Scores
+The following query identifies companies with governance scores exceeding 300 (from the public_esg dataset) and governance risk scores (from the sp_esg dataset) below 5. The results are displayed in a datatable using the **DT** package.
+```{r Query 4, echo=TRUE}
+query4 <-
+"SELECT 
+    d1.name As Name, governance_score As Governance_Score, governance_risk_score As Governance_Risk_Score
+FROM 
+    public_esg d1
+INNER JOIN 
+    sp_esg d2
+ON 
+    d2.symbol = UPPER(d1.ticker)
+WHERE governance_score > 300 
+    AND governance_risk_score < 5
+ORDER BY governance_score DESC"
+
+# Execute the query
+high_govern <- sqldf(query4)
+
+# Format the output using the datatable function
+datatable(high_govern, options = list(
+  scrollX = TRUE,  # horizontal scrolling
+  pageLength = 5   # Set the number of rows per page
+))
+
+```
+**Findings:** There is some discrepency between the governance scores and governance risk scores. Companies with high governance scores may not necessarily have low governance risk scores. This could be due to differences in the scoring methodologies used by the two datasets. However, these companies have effective governance practices that should be emulated by others.
+
+### Processing Dates for Large Companies with Over 75,000 Employees
+```{r Query 5, echo=TRUE}
+# Remove commas from 'full_time_employees' and convert it to numeric
+sp_esg$full_time_employees <- as.numeric(gsub(",", "", sp_esg$full_time_employees))
+
+# Convert 'last_processing_date' to Date format 
+public_esg$last_processing_date <- as.Date(public_esg$last_processing_date, format = "%d-%m-%Y")
+
+# Run the query
+query5 <- "
+SELECT 
+    d1.name AS Name, last_processing_date AS Processing_Date, full_time_employees AS Full_Time_Employees
+FROM 
+    public_esg d1
+INNER JOIN 
+    sp_esg d2
+ON 
+    d2.symbol = UPPER(d1.ticker)
+WHERE full_time_employees > 75000
+  AND last_processing_date = '19098' OR last_processing_date = '19099'
+ORDER BY last_processing_date DESC
+"
+
+# Execute the query
+large_companies <- sqldf(query5)
+
+# Convert last-processing-date back into date format
+large_companies$Processing_Date <- as.Date(large_companies$Processing_Date, origin = "1970-01-01")
+
+# Format the output using the datatable function
+datatable(large_companies, options = list(
+  scrollX = TRUE,  # horizontal scrolling
+  pageLength = 5   # Set the number of rows per page
+))
+
+```
+
+### Companies in High ESG Risk Percentiles
+The following query categorizes companies into ESG risk percentiles (Top 10%, Top 25%, Top 50%, Bottom 50%) and ranks them. The results are displayed in a datatable using the **DT** package and an interactive plot using the **plotly** package.
+```{r Query 6, echo=TRUE}
+query6 <-
+"SELECT *
+FROM (
+    SELECT 
+        name AS Name, 
+        esg_risk_percentile AS ESG_Risk_Percentile,
+        CASE
+            WHEN CAST(SUBSTRING(esg_risk_percentile, 1, 2) AS INT) >= 90 THEN 'Top 10%'
+            WHEN CAST(SUBSTRING(esg_risk_percentile, 1, 2) AS INT) BETWEEN 75 AND 89 THEN 'Top 25%'
+            WHEN CAST(SUBSTRING(esg_risk_percentile, 1, 2) AS INT) BETWEEN 50 AND 74 THEN 'Top 50%'
+            WHEN CAST(SUBSTRING(esg_risk_percentile, 1, 2) AS INT) < 50 THEN 'Bottom 50%'
+        END AS Category
+    FROM 
+        sp_esg
+) subquery
+WHERE Category IS NOT NULL
+    AND Category = 'Top 10%' OR Category = 'Top 25%' or Category = 'Top 50%'
+ORDER BY esg_risk_percentile DESC"
+
+# Execute the query
+esg_percentile <- sqldf(query6)
+
+# Format the output using the datatable function
+datatable(esg_percentile, options = list(
+  scrollX = TRUE,  # horizontal scrolling
+  pageLength = 5   # Set the number of rows per page
+))
+
+```
+
+```{r Plot Query 3, echo=FALSE, fig.width=9, fig.height=6, fig.align='center'}
+
+# Define the percentiles
+top_10_percentile <- 36
+top_25_percentile <- 23
+top_50_percentile <- 0
+
+# Plot the ESG risk scores by company
+plot2 <- plot_ly(
+  data = esg_percentile, # Drawing data from Query 1
+  x = ~`ESG_Risk_Percentile`, 
+  y = ~`Name`, 
+  type = 'scatter',
+  mode = 'markers',
+  text = ~paste("Company:", Name, "<br>ESG Risk Percentile:", ESG_Risk_Percentile), 
+  hoverinfo = 'text', 
+  marker = list(size = 10, color = 'black') 
+) %>%
+  layout(
+    title = list(
+      text = "Interactive Plot of Companies in High ESG Risk Percentiles",
+      font = list(size = 20) # Increase title size
+    ),
+    # X-axis label formatting
+    xaxis = list(
+      title = "ESG Risk Percentile",
+      titlefont = list(size = 18),
+       # Optional tick labels
+      showticklabels = FALSE
+    ),
+    # Y-axis label formatting
+    yaxis = list(
+      title = "Company",
+      showticklabels = FALSE,
+      titlefont = list(size = 18)
+    ),
+    # Add vertical lines for top percentiles
+    shapes = list(
+      list(
+        type = "line",
+        x0 = top_50_percentile,
+        x1 = top_50_percentile,
+        y0 = 0,
+        y1 = 1,
+        xref = "x", 
+        yref = "paper",
+        line = list(color = "green", width = 2, dash = "dash")
+      ),
+      list(
+        type = "line",
+        x0 = top_25_percentile,
+        x1 = top_25_percentile,
+        y0 = 0,
+        y1 = 1,
+        xref = "x", 
+        yref = "paper",
+        line = list(color = "orange", width = 2, dash = "dash")
+      ),
+      list(
+        type = "line",
+        x0 = top_10_percentile,
+        x1 = top_10_percentile,
+        y0 = 0,
+        y1 = 1,
+        xref = "x", 
+        yref = "paper",
+        line = list(color = "skyblue", width = 2, dash = "dash")
+      )
+    ),
+    # Add labels for the vertical lines
+    annotations = list(
+      # Label for Top 50%
+      list(
+        text = "Top 50%", # Label text
+        x = top_50_percentile, # X-position of the label
+        y = 1.01,  # Y-position of the label (just above the plot)
+        showarrow = TRUE,
+        arrowhead = 2,
+        ax = 0,
+        ay = -30,
+        font = list(size = 14, color = "green"),
+        xref = "x", 
+        yref = "paper"
+      ),
+      # Label for Top 25%
+      list(
+        text = "Top 25%", # Label text
+        x = top_25_percentile, # X-position of the label
+        y = 1.01,  # Y-position of the label
+        showarrow = TRUE,
+        arrowhead = 2,
+        ax = 0,
+        ay = -30,
+        font = list(size = 14, color = "orange"),
+        xref = "x", 
+        yref = "paper"
+      ),
+      # Label for Top 10%
+      list(
+        text = "Top 10%", # Label text
+        x = top_10_percentile, # X-position of the label
+        y = 1.01,  # Y-position of the label
+        showarrow = TRUE,
+        arrowhead = 2,
+        ax = 0,
+        ay = -30,
+        font = list(size = 14, color = "skyblue"),
+        xref = "x", 
+        yref = "paper"
+      ),
+      # Citation
+      list(
+        text = "Source: Kaggle.com", # Citation
+        x = 0.1, y = -0.2,  # Position of the citation
+        showarrow = FALSE,
+        font = list(size = 10),
+        xref = "paper",
+        yref = "paper",
+        xanchor = "left",
+        yanchor = "top"
+      )
+    ),
+    updatemenus = list(
+        list(
+          buttons = list(
+            list(method = "restyle", args = list("marker.color", 
+                list(ifelse(esg_percentile$Category == "Top 10%", 'skyblue', 'black'))), # Filter Global Top 50
+              label = "Top 10%"),
+            list(method = "restyle", args = list("marker.color", 
+                list(ifelse(esg_percentile$Category == "Top 25%", 'orange', 'black'))), # Filter Industry Top Rated
+              label = "Top 25%"),
+            list(method = "restyle", args = list("marker.color", 
+                list(ifelse(esg_percentile$Category == "Top 50%", 'lightgreen', 'black'))), # Filter Region Top Rated
+              label = "Top 50%"),
+            list(method = "restyle",args = list("marker.color", list('black')), # Reset to original color
+              label = "Show All")),
+          direction = "up", x = 0.1, y = -0.1, showactive = TRUE, type = "dropdown")),
+    # Adjust margins for the plot
+    margin = list(
+      l = 100, # Left margin
+      r = 50,  # Right margin
+      t = 100, # Top margin to avoid title cutoff
+      b = 100  # Bottom margin for citation
+    )
+  )
+
+# Display the plot
+plot2
+
+```
+**Findings:** Companies in the Top 10% have the highest ESG risk scores, while those in the top 50% have lower ESG risk scores. The Top 10% category has overlap with the list of companies created with high controversy scores. This plot can assist companies to set benchmarks for their ESG practices based on their intended ESG Risk Percentiles. 
+
+
+# Conclusion
+
+This analysis is an exploratory data analysis of ESG Risk data from two different datasets with data visualizations. My SQL queries extract various insights, such as similarities between the datasets, ESG risk scores by company, average ESG risk by industry, companies with high controversy scores, companies with exceptional governance scores, processing dates for large companies, and companies in high ESG risk percentiles. The visualizations provide an interactive and informative way to explore the data and derive meaningful insights.
+
+Future steps include:
+
+1. Expanding the analysis to include time-series trends.
+2. Comparing ESG scores with financial performance metrics.
+3. Developing predictive models for ESG risk assessment.
