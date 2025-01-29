@@ -1,7 +1,3 @@
----
-title: "Data Analysis Portfolio"
-output: github_document
----
 
 # Josie Zenger - Data Analysis Portfolio 
 
@@ -22,17 +18,17 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 - [About](#about)
 - [Portfolio Projects](#portfolio-projects)
 - **R**
-  - [ESG Reporting: Insights from the Biggest Players](#esg-report-insights)
+  - [ESG Reporting: Insights from the Biggest Players](#esg-reporting:-insights-from-the-biggest-players)
 - **SQL**
   - [Corporate ESG Data Cleaning and Exploration](#corporate-esg-data-cleaning-and-exploration)
 - **Tableau**
-  - [World Indicators Data Visualization and Dashboards](#world-indicators-data-visualization)
+  - [World Indicators Data Visualization and Dashboards](#world-indicators-data-visualization-and-dashboards)
 - **Qualitative (Otter.ai, MaxQDA)**
-  - [Evaluation of Pilot Wraparound Support Program](#evaluation-of-wraparound-program)
-  - [Belonging on BYU Campus: An Overview of a Mixed-Methods Study]()
+  - [Evaluation of Pilot Wraparound Support Program](#evaluation-of-pilot-wraparound-support-program)
+  - [Belonging on BYU Campus: An Overview of a Mixed-Methods Study](#belonging-on-byu-campus:-an-overview-of-a-mixed-methods-study)
 - **Power BI**
 - [Education](#education)
-- [Certificates](#certificates)
+- [Coursework](#coursework)
 - [Contact](#contact)
 
 ---
