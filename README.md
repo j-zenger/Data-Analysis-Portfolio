@@ -32,7 +32,6 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 ---
 
 ## Portfolio Projects
-In this section, I list data analytics projects, briefly describing the technology stack used to solve each case.
 
 ### ESG Reporting: Insights from the Biggest Players
 **Code:** [ESG Reporting Project Folder](https://github.com/lse-my472/my472-at24-final-j-zenger)
