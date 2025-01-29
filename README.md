@@ -38,7 +38,7 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 
 **Goal:** Extract key insights from ESG reports of global banks with high ESG ratings to identify trends and best practices.
 
-**Description:** This project involves scraping, cleaning, and analyzing ESG reports from sustainability-leading companies. 
+**Description:** This project involves scraping, cleaning, and analyzing ESG reports from companies that are high-ranked for their ESG practices. 
 
 **Skills:** Web scraping, quantitative text analysis, data cleaning, data visualization.
 
@@ -51,7 +51,7 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 ### Corporate ESG Data Cleaning and Exploration
 **Code:** [SQL ESG Data Exploration Folder](https://github.com/j-zenger/Data-Analysis-Portfolio/tree/main/SQL)
 
-**Description:** Cleaned and processed corporate ESG data to for preliminary data exploration and visualization .
+**Description:** This project uses two different datasets, extracted from Kaggle, that track the ESG ratings of large public companies. Using SQL functions in R, I loaded, cleaned and processed this data for data exploration and visualization.
 
 **Skills:** Data cleaning, joins, aggregations, filtering, and visualization
 
@@ -77,7 +77,7 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 
 **Goal:** Report on the effectiveness of a pilot wraparound support program for under-resourced university students.
 
-**Description:** This project involved qualitative data analysis of interviews and focus groups with students.
+**Description:** This project involved qualitative data analysis of interviews and focus groups with students that completed a pilot wraparound support program at a university to determine the program's efficacy.
 
 **Skills:** Discourse analysis, qualitative coding, thematic analysis.
 
@@ -92,7 +92,8 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 
 **Goal:** Investigate the sense of belonging among under-represented students at Brigham Young University.
 
-**Description:** This project involved a mixed-methods study, including surveys, interviews, and focus groups.
+**Description:** This project involved a mixed-methods study, including surveys, interviews, and focus groups. The resulting white paper is a brief overview of the multi-year, longitudinal mixed-methods study that compared the experiences of belonging for BIPOC, low-income, and first-generation students to white, upper-middle class students at BYU. 
+To complete this project, I analyzed more than 800 minutes of transcripts and executed linear regression analysis on over 1,000 survey responses.  
 
 **Skills:** Survey design, focus group design, qualitative coding, thematic analysis, data visualization, regression modeling. 
 
