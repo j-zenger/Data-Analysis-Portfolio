@@ -39,6 +39,7 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 **Goal:** Extract key insights from ESG reports of global banks with high ESG ratings to identify trends and best practices.
 
 **Description:** This project involves scraping, cleaning, and analyzing ESG reports from companies that are high-ranked for their ESG practices. 
+Company profiles were scraped from Sustainalytics.com and ESG reports of the top 12 global banks were scraped from their respective websites. 
 
 **Skills:** Web scraping, quantitative text analysis, data cleaning, data visualization.
 
@@ -62,7 +63,7 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 ### World Indicators Data Visualization and Dashboards
 **Code:** [Tableau World Indicators Visualizations Folder](https://github.com/j-zenger/Data-Analysis-Portfolio/tree/main/Tableau)
 
-**Description:** Created various data visualizations and interactive dashboards to visualize the World Indicators dataset.
+**Description:** In this project, I create various data visualizations and interactive dashboards to visualize the World Indicators dataset.
 
 **Skills:** Data visualization, dashboard creation, interactive charts.
 
