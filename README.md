@@ -16,14 +16,14 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 - [About](#about)
 - [Portfolio Projects](#portfolio-projects)
 - **R**
-  - [ESG Reporting: Insights from the Biggest Players](#esg-reporting:-insights-from-the-biggest-players)
+  - [ESG Reporting: Insights from the Biggest Players](#esg-reporting-insights-from-the-biggest-players)
 - **SQL**
   - [Corporate ESG Data Cleaning and Exploration](#corporate-esg-data-cleaning-and-exploration)
 - **Tableau**
   - [World Indicators Data Visualization and Dashboards](#world-indicators-data-visualization-and-dashboards)
 - **Qualitative (Otter.ai, MaxQDA)**
   - [Evaluation of Pilot Wraparound Support Program](#evaluation-of-pilot-wraparound-support-program)
-  - [Belonging on BYU Campus: An Overview of a Mixed-Methods Study](#belonging-on-byu-campus:-an-overview-of-a-mixed-methods-study)
+  - [Belonging on BYU Campus: An Overview of a Mixed-Methods Study](#belonging-on-byu-campus-an-overview-of-a-mixed-methods-study)
 - **Power BI**
 - [Education](#education)
 - [Coursework](#coursework)
@@ -116,8 +116,8 @@ In this section, I list data analytics projects, briefly describing the technolo
 ---
 
 ## Contact
-- **LinkedIn:** [www.linkedin.com/in/josie-zenger ]
-- **Email:** [josephinezenger@gmail.com]
+- **LinkedIn:** www.linkedin.com/in/josie-zenger 
+- **Email:** josephinezenger@gmail.com
 
 ---
 
