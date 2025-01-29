@@ -37,7 +37,7 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 In this section, I list data analytics projects, briefly describing the technology stack used to solve each case.
 
 ### ESG Reporting: Insights from the Biggest Players
-**Code:** [Provide file name or link]
+**Code:** [https://github.com/lse-my472/my472-at24-final-j-zenger]
 
 **Goal:** Extract key insights from ESG reports of global banks with high ESG ratings to identify trends and best practices.
 
@@ -52,7 +52,7 @@ In this section, I list data analytics projects, briefly describing the technolo
 ---
 
 ### Corporate ESG Data Cleaning and Exploration
-**Code:** [Provide file name or link]
+**Code:** [https://github.com/j-zenger/Data-Analysis-Portfolio/tree/main/SQL]
 
 **Description:** Cleaned and processed corporate ESG data to for preliminary data exploration and visualization .
 
@@ -63,7 +63,7 @@ In this section, I list data analytics projects, briefly describing the technolo
 ---
 
 ### World Indicators Data Visualization and Dashboards
-**Code:** [Provide file name or link]
+**Code:** [https://github.com/j-zenger/Data-Analysis-Portfolio/tree/main/Tableau]
 
 **Description:** Created various data visualizations and interactive dashboards to visualize the World Indicators dataset.
 
@@ -71,10 +71,12 @@ In this section, I list data analytics projects, briefly describing the technolo
 
 **Technology:** Tableau, Tableau Desktop
 
+**Results:** Created a series of visualization and interactive dashboards that visualize key indicators such as GDP, population, and life expectancy across different countries and regions.
+
 ---
 
 ### Evaluation of Pilot Wraparound Support Program
-**Code:** [Provide file name or link]
+**Code:** [https://github.com/j-zenger/Data-Analysis-Portfolio/blob/main/Qualitative%20Work/White%20Paper%20(BYU%20Version)_%20Wraparound%20Support%20Programming.pdf]
 
 **Goal:** Report on the effectiveness of a pilot wraparound support program for under-resourced university students.
 
@@ -88,7 +90,7 @@ In this section, I list data analytics projects, briefly describing the technolo
 ---
 
 ### Belonging on BYU Campus: An Overview of a Mixed-Methods Study
-**Code:** [Provide file name or link]
+**Code:** [https://github.com/j-zenger/Data-Analysis-Portfolio/blob/main/Qualitative%20Work/Final%20Belonging%20White%20Paper%20for%20BYU.pdf]
 
 **Goal:** Investigate the sense of belonging among under-represented students at Brigham Young University.
 
