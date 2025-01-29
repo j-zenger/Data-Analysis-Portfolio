@@ -85,6 +85,7 @@ In this section, I list data analytics projects, briefly describing the technolo
 **Technology:** Otter.ai, MaxQDA.
 
 **Results:** Delivered report to Stakeholders with key findings and recommendations the informed future programming on campus. 
+
 ---
 
 ### Belonging on BYU Campus: An Overview of a Mixed-Methods Study
@@ -99,6 +100,7 @@ In this section, I list data analytics projects, briefly describing the technolo
 **Technology:** Qualtrics, Otter.ai, MaxQDA, STATA.
 
 **Results:** Identified key factors that contribute to a sense of belonging on campus, and provided recommendations for improving the campus climate for under-represented students to stakeholders such as Office of Belonging, Administration Office, and Multicultural Student Center. 
+
 ---
 
 ## Education
