@@ -1,2 +1,130 @@
-# Data-Analysis-Portfolio
-Hi! This is my data analysis portfolio, where I show off my coding, analysis, and visualization skills. 
+---
+title: "Data Analysis Portfolio"
+output: github_document
+---
+
+# Josie Zenger - Data Analysis Portfolio 
+
+## About
+Hi, I'm Josie Zenger! I have a strong background in both sociology and data analysis. I am currently pursuing a Master's degree in Social Research Methods at the London School of Economics and Political Science. 
+During my professional and educational training, I have developed a strong capability to wield both quantitative and qualitative strategies with nuance and deliberation. 
+I am passionate to ESG, global inequality, and social justice, and am eager to apply my skills to address complex social issues. 
+I have expertise in data analysis, statistical modeling, and visualization.
+I am skilled in R, SQL, STATA, and Tableau, and have experience with Python and Power BI.
+
+**My CV:** [Attach or link your CV]
+
+This repository showcases my skills, projects, and progress in Data Analytics and Data Science.
+
+---
+
+## Table of Contents
+- [About](#about)
+- [Portfolio Projects](#portfolio-projects)
+- **R**
+  - [ESG Reporting: Insights from the Biggest Players](#esg-report-insights)
+- **SQL**
+  - [Corporate ESG Data Cleaning and Exploration](#corporate-esg-data-cleaning-and-exploration)
+- **Tableau**
+  - [World Indicators Data Visualization and Dashboards](#world-indicators-data-visualization)
+- **Qualitative (Otter.ai, MaxQDA)**
+  - [Evaluation of Pilot Wraparound Support Program](#evaluation-of-wraparound-program)
+  - [Belonging on BYU Campus: An Overview of a Mixed-Methods Study]()
+- **Power BI**
+- [Education](#education)
+- [Certificates](#certificates)
+- [Contact](#contact)
+
+---
+
+## Portfolio Projects
+In this section, I list data analytics projects, briefly describing the technology stack used to solve each case.
+
+### ESG Reporting: Insights from the Biggest Players
+**Code:** [Provide file name or link]
+
+**Goal:** Extract key insights from ESG reports of global banks with high ESG ratings to identify trends and best practices.
+
+**Description:** This project involves scraping, cleaning, and analyzing ESG reports from sustainability-leading companies. 
+
+**Skills:** Web scraping, quantitative text analysis, data cleaning, data visualization.
+
+**Technology:** R, RSelenium, Quanteda, Document Feature Matrices, ggplot2, plotly, Tidyverse.
+
+**Results:** Identified global trends in ESG Risk Ratings, most prominent ESG phrases found in ESG reports, and compared ESG reporting practices across different banks.
+ 
+---
+
+### Corporate ESG Data Cleaning and Exploration
+**Code:** [Provide file name or link]
+
+**Description:** Cleaned and processed corporate ESG data to for preliminary data exploration and visualization .
+
+**Skills:** Data cleaning, joins, aggregations, filtering, and visualization
+
+**Technology:** SQL (Data.World), SQL (RMarkdown), plotly, ggplot2, Tidyverse. 
+
+---
+
+### World Indicators Data Visualization and Dashboards
+**Code:** [Provide file name or link]
+
+**Description:** Created various data visualizations and interactive dashboards to visualize the World Indicators dataset.
+
+**Skills:** Data visualization, dashboard creation, interactive charts.
+
+**Technology:** Tableau, Tableau Desktop
+
+---
+
+### Evaluation of Pilot Wraparound Support Program
+**Code:** [Provide file name or link]
+
+**Goal:** Report on the effectiveness of a pilot wraparound support program for under-resourced university students.
+
+**Description:** This project involved qualitative data analysis of interviews and focus groups with students.
+
+**Skills:** Discourse analysis, qualitative coding, thematic analysis.
+
+**Technology:** Otter.ai, MaxQDA.
+
+**Results:** Delivered report to Stakeholders with key findings and recommendations the informed future programming on campus. 
+---
+
+### Belonging on BYU Campus: An Overview of a Mixed-Methods Study
+**Code:** [Provide file name or link]
+
+**Goal:** Investigate the sense of belonging among under-represented students at Brigham Young University.
+
+**Description:** This project involved a mixed-methods study, including surveys, interviews, and focus groups.
+
+**Skills:** Survey design, focus group design, qualitative coding, thematic analysis, data visualization, regression modeling. 
+
+**Technology:** Qualtrics, Otter.ai, MaxQDA, STATA.
+
+**Results:** Identified key factors that contribute to a sense of belonging on campus, and provided recommendations for improving the campus climate for under-represented students to stakeholders such as Office of Belonging, Administration Office, and Multicultural Student Center. 
+---
+
+## Education
+- **London School of Economics and Political Science (LSE)**  
+  *Master of Science (MSc) in Social Research Methods*  
+- **Brigham Young University**  
+  *Bachelor of Science (Bsc) in Sociology*  
+
+---
+
+## Coursework
+ - Graduate Level: Advanced R for Methodology Department, Data for Data Science, Quantitative Text Analysis, Advanced Regression Analysis, Fundamentals of Research Design, Comparative Case Studies and Analysis, Program and Policy Evaluation
+ - Undergraduate Level: Calculus I, Principles of Statistics, Spreadsheets and Business Analysis, Data Analysis and Presentation, Intro to Management of Information Systems
+
+---
+
+## Contact
+- **LinkedIn:** [www.linkedin.com/in/josie-zenger ]
+- **Email:** [josephinezenger@gmail.com]
+
+---
+
+This portfolio serves as an evolving collection of my work, showcasing my skills in data science and ESG analysis. I am always open to collaborations and discussions on data-driven sustainability solutions!
+
+
