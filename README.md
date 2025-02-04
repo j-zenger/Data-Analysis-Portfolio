@@ -6,7 +6,7 @@ Hi, I'm Josie Zenger! I have a strong background in both sociology and data anal
 During my professional and educational training, I have developed a strong capability to wield both quantitative and qualitative strategies for a variety of purposes, such as program and policy evaluation, monitoring and assessment, and accessible data visualization. 
 I am passionate about ESG, global inequality, and social justice, and am eager to apply my skills to address complex social issues. 
 I have expertise in data analysis, statistical modeling, and visualization.
-I am skilled in R, SQL, STATA, Tableau, Power BI, and have experience with Python and Machine Learning.
+I am skilled in Excel, R, SQL, STATA, Tableau, Power BI, and have experience with Python and Machine Learning.
 
 This repository showcases my skills, projects, and progress in Data Analytics and Data Science.
 
