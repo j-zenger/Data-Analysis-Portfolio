@@ -25,7 +25,7 @@ This repository showcases my skills, projects, and progress in Data Analytics an
   - [Evaluation of Pilot Wraparound Support Program](#evaluation-of-pilot-wraparound-support-program)
   - [Belonging on BYU Campus: An Overview of a Mixed-Methods Study](#belonging-on-byu-campus-an-overview-of-a-mixed-methods-study)
 - **Stata**
-    - [Social Disadvantage and Health Outcomes](#social-disadvantage-and-health-outcomes)
+    - [Examining Social Disadvantage and Health Outcomes](#examining-social-disadvantage-and-health-outcomes)
 - [Education](#education)
 - [Coursework](#coursework)
 - [Contact](#contact)
@@ -106,7 +106,7 @@ To complete this project, I analyzed more than 800 minutes of transcripts and ex
 ---
 
 ### Examining Social Disadvantage and Health Outcomes 
-**Code:** [Social Disadvantage and Health Outcomes](https://github.com/j-zenger/Data-Analysis-Portfolio/tree/main/SQL)
+**Code:** [Social Disadvantage and Health Outcomes Code and Write-up](https://github.com/j-zenger/Data-Analysis-Portfolio/tree/main/Stata)
 
 **Description:** This project uses two different datasets, UK Biobank and NHANES to test the hypothesis that social disadvantage not only leads to negative health outcomes, but also makes the effect of environmental and social correlates of health worse. 
 
