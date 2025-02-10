@@ -24,7 +24,8 @@ This repository showcases my skills, projects, and progress in Data Analytics an
 - **Qualitative (Otter.ai, MaxQDA)**
   - [Evaluation of Pilot Wraparound Support Program](#evaluation-of-pilot-wraparound-support-program)
   - [Belonging on BYU Campus: An Overview of a Mixed-Methods Study](#belonging-on-byu-campus-an-overview-of-a-mixed-methods-study)
-- **Power BI**
+- **Stata**
+    - [Social Disadvantage and Health Outcomes](#social-disadvantage-and-health-outcomes)
 - [Education](#education)
 - [Coursework](#coursework)
 - [Contact](#contact)
@@ -104,6 +105,17 @@ To complete this project, I analyzed more than 800 minutes of transcripts and ex
 
 ---
 
+### Examining Social Disadvantage and Health Outcomes 
+**Code:** [Social Disadvantage and Health Outcomes](https://github.com/j-zenger/Data-Analysis-Portfolio/tree/main/SQL)
+
+**Description:** This project uses two different datasets, UK Biobank and NHANES to test the hypothesis that social disadvantage not only leads to negative health outcomes, but also makes the effect of environmental and social correlates of health worse. 
+
+**Skills:** Data cleaning, regression, visualization, interpretation of regression outputs
+
+**Technology:** Stata, marginsplot 
+
+---
+
 ## Education
 - **London School of Economics and Political Science (LSE)**  
   *Master of Science (MSc) in Social Research Methods*  
@@ -124,6 +136,6 @@ To complete this project, I analyzed more than 800 minutes of transcripts and ex
 
 ---
 
-This portfolio serves as an evolving collection of my work, showcasing my skills in data science and ESG analysis. I am always open to collaborations and discussions on data-driven sustainability solutions!
+This portfolio serves as an evolving collection of my work, showcasing my skills in data analysis. I am always open to collaborations and discussions on data-driven solutions!
 
 

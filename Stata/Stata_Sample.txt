@@ -1,0 +1,106 @@
+cd "C:\Users\josiebea\Box\"
+
+
+capture log close
+ log using "Stata Sample: Exercises with Moderators.log", replace
+clear
+
+ 
+//Stata Sample: Exercises with Moderators
+//Josie Zenger
+
+use "C:\Users\josiebea\Box\UK Biobank.dta"
+
+//install estout to be able to use eststo function
+ssc install estout
+
+///Problem 1
+//recode variables to get rid of missing variables, create dichotomous variables 
+recode coldeg (-3=.)
+recode inc (-3=.)(-1=.)
+recode race (-3=.)(-1=.)
+recode smoker (-3=.)
+recode gender (2=1)(1=2) , gen(female)
+recode race (2/4=0)(1=1) , gen(white) 
+ 
+
+//create a touse variable to manage missing values in regression model
+gen touse=!missing(total, age, gender, inc, bmi, smoker, thlmsL, thlmsR, pm2_5, coldeg)
+
+//generate regression model to test null hypothesis controlling for other variables
+eststo m1: reg thlmsL c.pm2_5##coldeg total age white inc bmi ib0.smoker female if touse
+
+//create a margins chart
+margins coldeg, at(pm2_5=(8(1)20)) vsquish
+
+//use margins chart to graph the moderating function
+marginsplot, noci plotopts(msymbol(none)) ///
+	title("Figure 1." ///
+	"The relationship between air pollution and thalamus volume" "moderated by educational attainment:" ///
+	"Adjusted predictions{sup:a} from linear regression" , margin(medium)) ///
+legend(order(1 "No College Degree" 2 "College Degree")) ///
+xtitle("Particulate matter air pollution 2.5 ug/m{sup:3}") ///
+xlabel(8(1)20, format(%5.0f)) ///
+ylabel(5000(500)8500, format(%5.0f) angle(0)) ///
+ytitle("Volume in mm{sup:3}", margin(medium) size(medsmall)) ///
+note("Note: {sup:a} Model adjusted for totoal brain size, age, gender, race, income, body-mass index, and smoking status. N = `:di %5.0fc `e(N)''." ///
+"Source: {it:UK Biobank}.", span) ///
+ysize(5) xsize(9) scheme(s1mono)
+
+///Problem 2
+eststo m2: reg thlmsL c.pm2_5##c.age total coldeg female inc bmi ib0.smoker white if touse
+margins, at(pm2_5=(8(1)20) age=(50(10)80)) vsquish  
+
+//use margins chart to graph the moderating function
+marginsplot, noci plotopts(msymbol(none)) ///
+	title("Figure 2." ///
+	"The relationship between air pollution and thalamus volume moderated by age:" ///
+	"Adjusted predictions{sup:a} from linear regression") ///
+legend(title("Age in years", size(small)) ///
+	rows(1) region(lstyle(none)) order(1 "50" 2 "60" 3 "70" 4 "80")) ///
+xtitle("Air pollution (particulate matter 2.5 in ug/m{sup:3})") ///
+xlabel(8(1)20, format(%5.0f)) ///
+ylabel(5000(500)8500, format(%5.0f) angle(0)) ///
+ytitle("Volume in mm{sup:3}", margin(medium) size(medsmall)) ///
+ytitle("Thalamus volume (in mm{sup:3})") ///
+note("Note: {sup:a} Model adjusted for total brain size, educational attainment, gender, race, income, body-mass index, and smoking status. N = `:di %5.0fc `e(N)''." ///
+"Source: {it:UK Biobank}.", span) ///
+ysize(5) xsize(10) scheme(s1mono)
+
+  
+//problem 3
+//clear previous data from STATA
+clear 
+
+// load new data into Stata
+use "C:\Users\josiebea\Box\NHANES III.dta"
+
+//create a touse variable to manage missing values in regression model
+gen touse=!missing(seqn, sdl, toxo, age, female, race, edu, pir, health)
+
+//regression model for exercise 3
+eststo m3: reg sdl toxo##race age female ib1.edu pir health if touse
+
+//create matrix for margins plot 
+margins race, at(toxo=(0 1)) vsquish
+mat m = r(b)'
+mat toxo = 0\0\0\0\1\1\1\1
+mat race = 1\2\3\4\1\2\3\4
+svmat toxo
+svmat race
+svmat m 
+
+//create graph to represention regression output
+gr bar m1, ///
+over(toxo1, gap(20) relabel(1 `"Negative"' 2 "Positive")) ///
+over(race1, gap(60) relabel(1 "White" 2 "Black" 3 "Hispanic" 4 "Other")) ///
+title("Figure 3." ///
+"Race moderating the relationship between toxoplasmosis" ///
+"and score on SDL{sup:a} Test: Adjusted predictions{sup:b} from linear regression", size(medium)) ///
+ytitle("Serial Digit Learning Score") ylabel(0(2)9, angle(0)) ///
+note("Note: {sup:a} SDL: Serial Digit Learning Test. {sup:b} Model adjusted for age, gender, educational attainment, poverty-to-income ratio, and health. N = `:di %5.0fc `e(N)''." ///
+"Source: {it:National Health and Nutrition Examination Survey 3}.", span) ///
+ysize(5) xsize(10) scheme(s1mono)
+
+
+log close
