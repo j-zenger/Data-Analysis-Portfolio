@@ -114,6 +114,8 @@ To complete this project, I analyzed more than 800 minutes of transcripts and ex
 
 **Technology:** Stata, marginsplot 
 
+**Results:** The several tests in this report support the theoretical framework that social disadvantage is related to negative health outcomes and that social disadvantage also makes the effect of environmental and social correlates of health worse. 
+
 ---
 
 ## Education
